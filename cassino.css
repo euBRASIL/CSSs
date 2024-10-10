@@ -1,0 +1,532 @@
+/* Created by lolo */
+
+body {
+	
+	background: url("mesa-roleta-incrivel.avif");
+	background-size: cover;
+	
+	/*
+    background:
+        radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 9%, hsla(0, 100%, 20%, 0) 9%) 0 0,
+        radial-gradient(hsl(0, 100%, 27%) 4%, hsl(0, 100%, 18%) 8%, hsla(0, 100%, 20%, 0) 10%) 50px 50px,
+        radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 50px 0,
+        radial-gradient(hsla(0, 100%, 30%, 0.8) 20%, hsla(0, 100%, 20%, 0)) 0 50px,
+        radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 50px 0,
+        radial-gradient(hsla(0, 100%, 20%, 1) 35%, hsla(0, 100%, 20%, 0) 60%) 100px 50px,
+        radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 0 0,
+        radial-gradient(hsla(0, 100%, 15%, 0.7), hsla(0, 100%, 20%, 0)) 50px 50px,
+        linear-gradient(45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0,
+        linear-gradient(-45deg, hsla(0, 100%, 20%, 0) 49%, hsla(0, 100%, 0%, 1) 50%, hsla(0, 100%, 20%, 0) 70%) 0 0;
+        background-color: #300;
+        background-size: 100px 100px;	
+        margin:0;padding:0;
+         font-family: 'Fjalla One';
+    } */
+	
+    #canvas-container{
+        position:absolute;
+        top:-110px;
+		left: -530px;
+    }
+    canvas {
+        transform: scale(1);
+        transform-origin: top;
+        width:  420px;
+        height: 420px;
+	
+    }
+	
+    .container{
+        position:absolute;
+        margin:auto;
+        left:0;top:0px;right:0;bottom:0;
+        width:0px;
+        height:0px;
+        border:0px solid black;
+        background-color: green;
+        box-shadow: 0px 0px 0px black;
+    }
+    
+    .red{background-color:red;box-shadow:inset 0 0 5px black;}
+    .black{background-color:black;box-shadow:inset 0 0 2px white;}
+    .green{background-color:green;box-shadow:inset 0 0 5px black;}
+        
+    #output{ /* este css configura o número que foi sorteado na rodada */
+        position:absolute;
+        top:   200px;
+        left:  -16px;
+        height:75px;
+		width: 50px;
+        background-color:green;
+        color:white;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-size:2em;
+        border:2px solid white;
+        box-shadow:5px 5px 5px black;
+    }
+    .dinheiro, .box2{
+        position:absolute;
+        width:155px;
+        height:30px;
+        top:-350px;
+        left:412px;
+        color:white;
+        font-size:3.8em;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border:0.5px solid green;
+        user-select: none;
+        cursor:pointer;
+    }
+    .premio, .box3{
+        position:absolute;
+        width:155px;
+        height:30px;
+        top:-350px;
+        left:-450px;
+        color:white;
+        font-size:3.8em;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border:0.5px solid green;
+        user-select: none;
+        cursor:pointer;
+    }
+
+    .box2{
+        border:none;
+        justify-content:center;
+        align-items:center;
+        border-top:2px solid black;
+        box-shadow:inset 0 0 10px black;
+    }
+    .token{
+        position:absolute;
+        top:3px;
+        left:0px;
+        width:17px;
+        height:17px;
+        border-radius:50%;
+        background-color:white;
+        color:black;
+        font-size:0.8em;
+        border:1.5px dashed blue;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        user-select: none;
+    }
+    .more100{
+        font-size:0.6em;
+    }
+    .choicetoken{
+        position:absolute;
+        width:20px;
+        height:20px;
+        border-radius:50%;
+        color:black;
+        border:1.5px dashed blue;
+        background-color:white;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-size:0.6em;
+        font-weight:bold;
+        cursor:pointer;
+        box-shadow:0 0 10px transparent;
+    }
+    .token1{top:160px;left:5px;box-shadow: 0 0 10px black;transform:scale(1.2);}
+    .token5{top:160px;left:35px;}
+    .token10{top:160px;left:65px;}
+    .tokenall{top:160px;left:95px;font-size:0.5em;}
+    .token1less{top:160px;left:270px;}
+    .token5less{top:160px;left:300px;}
+    .token10less{top:160px;left:330px;}
+    
+    .c0{width: 25px; transform: rotate(-90deg); border-radius:50% 0 0 50%;}
+	
+    .b1{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; 
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 102px; left: 44px; }
+    .b2{width: 25px; transform: rotate(-90deg); }
+	
+    .b3{ /* Número 3 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em; 
+		position:absolute; top: -28px; left: 44px; } /* Posicionamento linha, coluna */
+		
+    .b4{width: 25px; transform: rotate(-90deg); }
+	
+    .b5{ /* Número 5 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 37px; left: 77px; } /* Posicionamento linha, coluna */
+		
+    .b6{width: 25px; transform: rotate(-90deg); }
+	
+    .b7{ /* Número 7 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 102px; left: 111px; } /* Posicionamento linha, coluna */
+		
+    .b8{width: 25px; transform: rotate(-90deg); }
+	
+    .b9{ /* Número 9 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: -28px; left: 110px; } /* Posicionamento linha, coluna */
+	
+    .b10{width: 45px; transform: rotate(-90deg); top:0;rigth:260px;}
+    .b11{width: 45px; transform: rotate(-90deg); top:0;rigth:285px;}
+	
+    .b12{ /* Número 12 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: -28px; left: 143px; } /* Posicionamento linha, coluna */
+		
+    .b13{width: 45px; transform: rotate(-90deg); top:0; rigth:335px;}  
+	
+    .b14{ /* Número 14 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 37px; left: 177px; } /* Posicionamento linha, coluna */
+		
+    .b15{top:30px;left:60px;}
+	
+    .b16{ /* Número 16 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 102px; left: 211px; } /* Posicionamento linha, coluna */
+		
+    .b17{top:30px;left:110px;}
+	
+    .b18{ /* Número 18 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: -28px; left: 211px; } /* Posicionamento linha, coluna */
+		
+    .b19{ /* Número 19 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 102px; left: 243px; } /* Posicionamento linha, coluna */
+	
+    .b20{top:30px;left:185px;}
+	
+    .b21{ /* Número 21 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: -28px; left: 243px; } /* Posicionamento linha, coluna */
+		
+    .b22{top:30px;left:235px;}
+	
+    .b23{ /* Número 23 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 37px; left: 277px; } /* Posicionamento linha, coluna */
+		
+    .b24{top:30px;left:285px;}
+	
+    .b25{ /* Número 25 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 102px; left: 311px; } /* Posicionamento linha, coluna */
+		
+    .b26{top:30px; left:335px;}
+    
+    .b27{ /* Número 27 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: -28px; left: 311px; } /* Posicionamento linha, coluna */
+		
+    .b28{top:60px;left:60px;}
+    .b29{top:60px;left:85px;}
+	
+    .b30{ /* Número 30 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: -28px; left: 344px; } /* Posicionamento linha, coluna */
+		
+    .b31{top:60px;left:135px;}
+	
+    .b32{ /* Número 32 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 37px; left: 377px; } /* Posicionamento linha, coluna */
+		
+    .b33{top:60px;left:185px;}
+	
+    .b34{ /* Número 34 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: 102px; left: 411px; } /* Posicionamento linha, coluna */
+		
+    .b35{top:60px;left:235px;}
+	
+    .b36{ /* Número 36 */
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+		width: 63px; height: 30px; /* Tamanho deste campo */
+		transform: rotate(-90deg); 
+		font-weight:bold; font-size:1.8em;
+		position:absolute; top: -28px; left: 411px; } /* Posicionamento linha, coluna */
+		
+    .b37{top:60px;left:285px;}
+    .b38{top:60px;left:310px;}
+    .b39{top:60px; left:335px;}  
+    
+    .b40{top:90px;left:35px;width:100px;}
+    .b41{top:90px;left:135px;width:100px;}
+    .b42{top:90px;left:235px;width:100px;}
+    
+    .b43{top:120px;left:35px;width:50px;}
+    .b44{top:120px;left:85px;width:50px;}
+    .b45{top:120px;left:135px;width:50px;}
+    .b46{top:120px;left:185px;width:50px;}
+    .b47{top:120px;left:235px;width:50px;}
+    .b48{top:120px;left:285px;width:50px;}
+    
+    .b49{top:-350px; left: -500px;    width:250px;height:75px; background-color:white;color:black;font-size:4em;} /* Saldo em Real */
+    .b50{top:190px;  left: 100px; width:161px;background-color:red;}
+    .b51{top:-350px; left: 461px; width:200px;height:75px; background-color:white;color:black;font-size:4em;}
+    
+    #cash{
+        position:absolute;
+        top:-340px;
+        left:-310px;
+        font-size:.5em;
+        font-weight:bold;
+    }
+    #bet{
+        position:absolute;
+        top:  300px;
+        left: 345px;
+        font-size:.5em;
+        font-weight:bold;
+    }
+    #play{ /* este css configura o botão de << play >> deste Jogo */
+        position:absolute;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+        font-size:1.3em;
+        top:  320px;
+        left: 85px;
+        width: 100px;
+        height:30px;
+        background: linear-gradient(0deg, #B7DAEC, #06A8DA, #08689A, #023047);
+        border-radius:30px;
+        box-shadow:5px 10px 10px black;
+        cursor:pointer;
+    }
+    .abandonar{
+        position:absolute;
+        top:  285px;
+        left: 57px;
+        color:white;
+		
+        width:155px;
+        height:30px;
+        font-size:1.1em;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        border:0.5px solid green;
+        user-select: none;
+        cursor:pointer;
+    }
+    }
+    h3{
+        text-decoration:underline;
+    }
+	
+    #info{ /* este css configura as "Regras do Jogo" */
+        display:none;
+        position:absolute;
+        justify-content:center;
+        align-items:center;
+        width: 380px;
+        height:220px;
+		
+        top:  -380px;
+        left: -10px;
+		
+        border-radius:10px;
+        background:white;
+        font-size:0.8em;
+        text-align:center;
+        background-color:teal;
+        color:white;
+        border:2px solid white;
+        user-select: none;
+	}
+    #informa{
+        position:absolute;
+
+        top: -540px;
+        left: -550px;
+        color:white;
+        cursor:pointer;
+	}	
+    #close{ /* este css configura o (x) de fechar a janela id="info" */
+        position:absolute;
+
+        top:  4px;
+        right: 1px;
+        color:white;
+        cursor:pointer;
+    }
+    #btninfo{ /* este css configura o (i) de informa no Jogo */
+        position:absolute;
+        top:-140px;
+        left:-555px;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:white;
+        width:10px;
+        height:10px;
+        bottom:-50px;
+        right:0px;
+        padding:5px;
+        border-radius:50%;
+        background-color:#06A8DA;
+        border:2px solid white;
+        box-shadow:3px 3px 5px black;
+        font-size:0.8em;
+        cursor:pointer;
+    }
+    #finish{ /* este css configura o "Aposte Agora e Ganhe" */
+        display:none;
+        justify-content:center;
+        align-items:center;
+        position:absolute;
+        font-size:1.5em;
+        top:-235px;
+        left:-5px;
+        width:360px;
+        height:40px;
+        background:white;
+        border-radius:10px;
+        border:3px solid blue;
+        box-shadow:5px 10px 10px black;
+    }
+    #footer{
+        position:fixed;
+        bottom:0;
+        right:0;
+        width:120px;
+        height:30px;
+        color:white;
+        font-size:0.7em;
+        background-color:rgba(0,0,0,.5);
+        border-radius:50px 0 0 0 ;
+    }
+	
+    #lololearn{
+        position:absolute;
+        bottom:8.5px;
+        right:35px;
+    }
+    #loloimg{
+        position:absolute;
+        bottom:5px;
+        right:5px;
+        width:20px;
+        border-radius:50%;
+    }
+    a{
+        color:white;
+    }
